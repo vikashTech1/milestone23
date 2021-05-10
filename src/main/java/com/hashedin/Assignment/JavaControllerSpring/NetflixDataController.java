@@ -42,27 +42,27 @@ public class NetflixDataController {
         }else {
 
             List<NetflixRecords> filteredList = null;
-            long startTime = System.currentTimeMillis();
-            long endTime = 0;
+            long initialTime = System.currentTimeMillis();
+            long finalTime = 0;
 
             if (count != null) {
                 filteredList = netflixDataService.getDataTypeTVShow(Integer.parseInt(count));
-                endTime = System.currentTimeMillis();
+                finalTime = System.currentTimeMillis();
             } else if (movieType != null) {
                 filteredList = netflixDataService.getMoviesDataByType(movieType);
-                endTime = System.currentTimeMillis();
+                finalTime = System.currentTimeMillis();
 
             } else if (country != null) {
                 filteredList = netflixDataService.getMoviesDataByCountryName(country);
-                endTime = System.currentTimeMillis();
+                finalTime = System.currentTimeMillis();
 
             } else if (startDate != null && endDate != null) {
                 filteredList = netflixDataService.getTVShowsDataByStartDateEndDate(startDate, endDate);
                 if(filteredList.size() == 0) throw new ExceptionClass();
-                endTime = System.currentTimeMillis();
+                finalTime = System.currentTimeMillis();
             }
-            long timeElapsed = endTime - startTime;
-            System.out.println("Execution time:" + timeElapsed);
+            long timeTaken = finalTime - initialTime;
+            System.out.println("Execution time:" + timeTaken);
 
             HttpHeaders headers = new HttpHeaders();
             headers.add("TIME-TO-EXECUTE", timeElapsed + "ms");
