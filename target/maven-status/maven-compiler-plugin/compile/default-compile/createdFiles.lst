@@ -1,0 +1,17 @@
+com\hashedin\Assignment\repo\AssignmentRepository.class
+com\hashedin\Assignment\AssignmentApplication.class
+com\hashedin\Assignment\controller\NetflixDataController.class
+com\hashedin\Assignment\JavaException\ExceptionClass.class
+com\hashedin\Assignment\JavaException\ErrorHandler.class
+com\hashedin\Assignment\netflixContent\NetflixDataServiceImp.class
+com\hashedin\Assignment\exception\ErrorHandler.class
+com\hashedin\Assignment\JavaControllerSpring\NetflixDataController.class
+com\hashedin\Assignment\netflixContent\NetflixDataService.class
+com\hashedin\Assignment\service\NetflixDataService.class
+com\hashedin\Assignment\netflixDetails\NetflixRecords.class
+com\hashedin\Assignment\service\NetflixDataServiceImp.class
+com\hashedin\Assignment\exception\ListEmptyException.class
+com\hashedin\Assignment\Utils\Utility.class
+com\hashedin\Assignment\repository\AssignmentRepository.class
+com\hashedin\Assignment\pojo\Netflix.class
+com\hashedin\Assignment\Utilities\Utility.class
