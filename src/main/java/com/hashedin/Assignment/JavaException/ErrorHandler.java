@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ErrorHandler {
 
     @ExceptionHandler(value = ExceptionClass.class)
-    public ResponseEntity<Object> exception(ExceptionClass exception){
+    public ResponseEntity<Object> exception(ExceptionClass exception) {
         return new ResponseEntity<>("No Data Available", HttpStatus.BAD_REQUEST);
     }
 }

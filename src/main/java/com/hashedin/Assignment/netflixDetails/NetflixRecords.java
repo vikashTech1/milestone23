@@ -20,7 +20,8 @@ public class NetflixRecords {
     private String listedAs;
     private String description;
 
-    public NetflixRecords(){}
+    public NetflixRecords() {
+    }
 
     public NetflixRecords(String showId, String type, String title, String director, String cast, String country, String dateAdded, String releaseYear, String rating, String duration, String listedAs, String description) {
         this.showId = showId;

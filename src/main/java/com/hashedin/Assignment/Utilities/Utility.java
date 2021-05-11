@@ -20,7 +20,7 @@ public class Utility {
 //    String file="src/netflix_titles.csv";
 
     @Cacheable(value = "readDataFromCSV")
-    public static List<NetflixRecords> readDataFromCSV(String filename){
+    public static List<NetflixRecords> readDataFromCSV(String filename) {
 
         try {
 
@@ -30,7 +30,7 @@ public class Utility {
                     .skip(0)
                     .map(row -> row.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"))
                     .map(data -> new NetflixRecords(data[0], data[1], data[2], data[3], data[4], data[5], data[6],
-                            data[7], data[8], data[9], data[10], data[11] ))
+                            data[7], data[8], data[9], data[10], data[11]))
                     .collect(Collectors.toList());
 
         } catch (IOException e) {
@@ -51,18 +51,18 @@ public class Utility {
 
     }
 
-    public static List<NetflixRecords> filterByType(List<NetflixRecords> data, String movieType){
+    public static List<NetflixRecords> filterByType(List<NetflixRecords> data, String movieType) {
         //example type: Horror Movies
         return data.stream().filter(row -> row.getListedAs().contains(movieType)).collect(Collectors.toList());
     }
 
-    public static List<NetflixRecords> filterByCountry(List<NetflixRecords> data, String country){
+    public static List<NetflixRecords> filterByCountry(List<NetflixRecords> data, String country) {
 
         return data.stream().filter(row -> row.getType().equals("Movie")
                 && row.getCountry().equals(country)).collect(Collectors.toList());
     }
 
-    public static boolean isValidDate(String date){
+    public static boolean isValidDate(String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yy");
         sdf.setLenient(false);
 
@@ -74,7 +74,7 @@ public class Utility {
         return true;
     }
 
-    public static Date dateFormate(String userDate){
+    public static Date dateFormate(String userDate) {
         String pattern = "dd-MMM-yy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         try {
@@ -85,9 +85,9 @@ public class Utility {
         return null;
     }
 
-    public static List<NetflixRecords> DateSearch(List<NetflixRecords> filteredList, String startDate, String endDate){
+    public static List<NetflixRecords> DateSearch(List<NetflixRecords> filteredList, String startDate, String endDate) {
 
-        String date = startDate.trim()+","+endDate.trim();
+        String date = startDate.trim() + "," + endDate.trim();
         List<NetflixRecords> finalList = filteredList.stream()
                 .filter(row -> row.getDateAdded().length() > 0 &&
                         !(row.getDateAdded().charAt(0) >= 'a' && row.getDateAdded().charAt(0) <= 'z') &&
@@ -98,13 +98,13 @@ public class Utility {
     }
 
 
-    public static boolean moviesBetweenUserDateInput(String userDate, String dateAdded){
+    public static boolean moviesBetweenUserDateInput(String userDate, String dateAdded) {
         String[] tempDate = userDate.split(",");
         Date startDate = Utility.dateFormate(tempDate[0]);
         Date endDate = Utility.dateFormate(tempDate[1]);
 
         Date newDateAdded = null;
-        if(Utility.isValidDate(dateAdded)){
+        if (Utility.isValidDate(dateAdded)) {
             newDateAdded = Utility.dateFormate(dateAdded);
             return startDate.equals(newDateAdded) || endDate.equals(newDateAdded);
         }
