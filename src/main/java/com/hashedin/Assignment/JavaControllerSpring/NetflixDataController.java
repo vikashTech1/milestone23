@@ -22,24 +22,24 @@ public class NetflixDataController {
     private NetflixDataService netflixDataService;
 
     @Autowired
-    public NetflixDataController(NetflixDataService netflixDataService) {
+    public NetflixDataController(NetflixDataService netflixDataService){
         this.netflixDataService = netflixDataService;
     }
 
-    @GetMapping(path = "/tvshows")
+    @GetMapping(path = "/tvshows" )
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<List<NetflixRecords>> getNetflixDataRecords(
             @RequestParam(value = "count", required = false) String count,
-            @RequestParam(value = "movieType", required = false) String movieType,
+            @RequestParam(value = "movieType",required = false) String movieType,
             @RequestParam(value = "country", required = false) String country,
             @RequestParam(value = "startDate", required = false) String startDate,
             @RequestParam(value = "endDate", required = false) String endDate,
-            HttpServletRequest request) {
+            HttpServletRequest request){
 
         String tag = request.getHeader("X-Auth-Token");
-        if (tag == null) {
+        if(tag == null){
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        } else {
+        }else {
 
             List<NetflixRecords> filteredList = null;
             long startTime = System.currentTimeMillis();
@@ -57,8 +57,8 @@ public class NetflixDataController {
                 endTime = System.currentTimeMillis();
 
             } else if (startDate != null && endDate != null) {
-                filteredList = netflixDataService.getTVShowsDataByUserDateInput(startDate, endDate);
-                if (filteredList.size() == 0) throw new ExceptionClass();
+                filteredList = netflixDataService.getTVShowsDataByStartDateEndDate(startDate, endDate);
+                if(filteredList.size() == 0) throw new ExceptionClass();
                 endTime = System.currentTimeMillis();
             }
             long timeElapsed = endTime - startTime;
@@ -67,20 +67,20 @@ public class NetflixDataController {
             HttpHeaders headers = new HttpHeaders();
             headers.add("TIME-TO-EXECUTE", timeElapsed + "ms");
 
-
+            
             return new ResponseEntity<>(filteredList, headers, HttpStatus.OK);
         }
 
     }
 
-    @PostMapping(path = "/addtodb")
-    public void addNetflixDetailsToDataBase(@RequestBody List<NetflixRecords> netflixData) {
+    @PostMapping(path="/addtodb")
+    public void addNetflixDetailsToDataBase(@RequestBody List<NetflixRecords> netflixData){
         netflixDataService.addNetflixDetailsToDataBase(netflixData);
     }
 
     @PostMapping(path = "/addtodborcsv")
     public void addNetflixDataToDbOrCSV(@RequestParam(value = "option") String option,
-                                        @RequestBody List<NetflixRecords> netflixData) {
+                                        @RequestBody List<NetflixRecords> netflixData){
 
     }
 
