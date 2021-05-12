@@ -1,0 +1,21 @@
+version: "3"
+services:
+  netflixdata:
+    image: Assignment-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8086:8086"
+    networks:
+      - hasher1
+    depends_on:
+      - datamysql
+
+  datamysql:
+    image: mysql:8.0
+    networks:
+      - hasher1
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=netflixdata
+
+networks:
+   hasher1:
